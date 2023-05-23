@@ -69,7 +69,12 @@ def summary():
                 listCount[i] = listCount[j]    
                 listCount[j] = temp
 
-    print(tabulate.tabulate(listCount, [key[0],'jumlah kontak'], tablefmt='outline'))    
+    print(tabulate.tabulate(listCount, [key[0],'jumlah kontak'], tablefmt='outline'))
+
+summary()
+
+# print(tabulate.tabulate(listCount, [key[0],'jumlah kontak'], tablefmt='outline'))
+    
 
 # 2. Menambah Data Kontak
 def add():

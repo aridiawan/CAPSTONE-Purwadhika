@@ -1,0 +1,44 @@
+-- IDEA --
+Apps: Yellow pages (daftar buku telefon)
+
+Function: mencari info kontak penting Yogyakarta
+User: General
+
+Fitur (CRUD):
+1. Create
+2. Read
+3. Update
+4. Delete
+
+Menu:
+CONCEPT I
+1. Menampilkan Daftar Kontak
+2. Menambah Data Kontak
+3. Mengupdate Data Kontak
+4. Menghapus Data Kontak
+5. Bookmark Data Kontak
+6. Mencari Data Kontak
+7. Summary Data Kontak
+8. Keluar Program
+
+CONCEPT II
+1. Menampilkan Daftar Kontak
+    a. Show All Data
+    b. Show Bookmark Only
+    c. Show by Filter
+    d. Show Summary Kontak
+2. Menambah Data Kontak
+3. Menghapus Data Kontak (Add notif buat konfirmasi)
+4. Mengedit Data Kontak
+5. Exit
+
+Column:
+id
+nama
+no_telepon
+jenis
+kabupaten_kota
+bookmark
+
+
+Rules (Complexity):
