@@ -33,12 +33,12 @@ CONCEPT II
 5. Exit
 
 Column:
-id
-nama
-no_telepon
-jenis
-kabupaten_kota
-bookmark
+id (int)
+nama (str) - upper
+no_telepon (str)
+jenis (str) - lower
+kabupaten_kota (str) - capitalize(?)
+bookmark (str) - yes/no
 
 
 Rules (Complexity):

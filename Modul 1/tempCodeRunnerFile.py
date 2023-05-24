@@ -1,4 +1,5 @@
 import csv
+import sys
 import tabulate
 import pyinputplus as pypi
 
@@ -53,28 +54,48 @@ def filter():
     # c. Show Summary Kontak
 def summary():
     key = header[3:5]
+
+    # JENIS
     listvalue1 = list(dataset[i][key[0]] for i in range(len(dataset)))
-    listvalue1Unique = list({dataset[i][key[0]] for i in range(len(dataset))})
-    listCount = []
+    listvalue2Unique = list({dataset[i][key[0]] for i in range(len(dataset))})
+    listCount1 = []
     # Create list data
-    for i in range(len(listvalue1Unique)):
-        listCount.append([
-            listvalue1Unique[i],listvalue1.count(listvalue1Unique[i])])
+    for i in range(len(listvalue2Unique)):
+        listCount1.append([
+            listvalue2Unique[i],listvalue1.count(listvalue2Unique[i])])
 
     # Sort Descending
-    for i in range(len(listCount)):    
-        for j in range(i+1, len(listCount)):    
-            if(listCount[i][1] < listCount[j][1]):    
-                temp = listCount[i]    
-                listCount[i] = listCount[j]    
-                listCount[j] = temp
+    for i in range(len(listCount1)):    
+        for j in range(i+1, len(listCount1)):    
+            if(listCount1[i][1] < listCount1[j][1]):    
+                temp = listCount1[i]    
+                listCount1[i] = listCount1[j]    
+                listCount1[j] = temp
 
-    print(tabulate.tabulate(listCount, [key[0],'jumlah kontak'], tablefmt='outline'))
+    print('\nData Jumlah Kontak berdasarkan Jenis')
+    print(tabulate.tabulate(listCount1, [key[0],'jumlah kontak'], tablefmt='outline'))   
+    print('\n') 
 
-summary()
+    # KABUPATEN KOTA
+    listvalue2 = list(dataset[i][key[1]] for i in range(len(dataset)))
+    listvalue2Unique = list({dataset[i][key[1]] for i in range(len(dataset))})
+    listCount2 = []
+    # Create list data
+    for i in range(len(listvalue2Unique)):
+        listCount2.append([
+            listvalue2Unique[i],listvalue2.count(listvalue2Unique[i])])
 
-# print(tabulate.tabulate(listCount, [key[0],'jumlah kontak'], tablefmt='outline'))
-    
+    # Sort Descending
+    for i in range(len(listCount2)):    
+        for j in range(i+1, len(listCount2)):    
+            if(listCount2[i][1] < listCount2[j][1]):    
+                temp = listCount2[i]    
+                listCount2[i] = listCount2[j]    
+                listCount2[j] = temp
+
+    print('Data Jumlah Kontak berdasarkan Kabupaten Kota')
+    print(tabulate.tabulate(listCount2, [key[1],'jumlah kontak'], tablefmt='outline'))   
+    print('\n')
 
 # 2. Menambah Data Kontak
 def add():
@@ -129,4 +150,37 @@ def edit():
 
     show(dataset)
 
-# 5. Exit
+def main():
+    global dataset
+
+    while True:
+        prompt = f'---Welcome to Yogyakarta IMPORTANT Contact System---\n'
+        choice = ['Menampilkan Daftar Kontak', 'Menambah Kontak', 'Menghapus Kontak', 'Mengedit Kontak', 'Exit']
+
+        response = pypi.inputMenu(prompt=prompt, choices=choice, numbered=True)
+
+        if response == choice[0]:
+            show(dataset)
+        elif response == choice[1]:
+            add()
+        elif response == choice[2]:
+            delete()
+        elif response == choice[3]:
+            edit()
+        else:
+            break
+
+    file = open(path, 'w', newline = '')
+
+    writer = csv.writer(file, delimiter=';')
+
+    datasetVal = [header]
+    for i in range(len(dataset)):
+        datasetVal.append(dataset[i].values())
+
+    writer.writerows(datasetVal)
+
+    file.close()
+
+main()
+sys.exit()
