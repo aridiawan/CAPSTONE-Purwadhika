@@ -126,7 +126,7 @@ def delete():
     id = int(input('Masukkan id yang ingin dihapus :'))
 
     # delete process
-    for i in range(len(dataset)-1):
+    for i in range(len(dataset)):
         if id == list(dataset[i].values())[0]:
             del dataset[i]
 
@@ -137,7 +137,7 @@ def edit():
     
     id = int(input('Masukkan id yang ingin diedit :'))
 
-    for i in range(len(dataset)-1):
+    for i in range(len(dataset)):
         if id == list(dataset[i].values())[0]:
             while True:
                 key = pypi.inputMenu(prompt='Pilih info yang mau diupdate :\n', choices=header[1:], numbered=True)
@@ -154,13 +154,25 @@ def main():
     global dataset
 
     while True:
-        prompt = f'---Welcome to Yogyakarta IMPORTANT Contact System---\n'
+        print('\n---Welcome to Yogyakarta IMPORTANT Contact System---\n')
+        prompt = f'Silahkan Pilih Menu :\n'
         choice = ['Menampilkan Daftar Kontak', 'Menambah Kontak', 'Menghapus Kontak', 'Mengedit Kontak', 'Exit']
 
         response = pypi.inputMenu(prompt=prompt, choices=choice, numbered=True)
 
         if response == choice[0]:
             show(dataset)
+            while True:
+                choiceDisp = ['Search Nama','Filter','Summary Kontak-mu','Back to Main Menu']
+                respDisp = pypi.inputMenu(choices=choiceDisp, numbered=True)
+                if respDisp == choiceDisp[0]:
+                    print('fitur otw')
+                elif respDisp == choiceDisp[1]:
+                    filter()
+                elif respDisp == choiceDisp[2]:
+                    summary()
+                else:
+                    break
         elif response == choice[1]:
             add()
         elif response == choice[2]:
