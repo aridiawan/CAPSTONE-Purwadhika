@@ -11,16 +11,6 @@ Fitur (CRUD):
 4. Delete
 
 Menu:
-CONCEPT I
-1. Menampilkan Daftar Kontak
-2. Menambah Data Kontak
-3. Mengupdate Data Kontak
-4. Menghapus Data Kontak
-5. Bookmark Data Kontak
-6. Mencari Data Kontak
-7. Summary Data Kontak
-8. Keluar Program
-
 CONCEPT II
 1. Menampilkan Daftar Kontak
     a. Show All Data
@@ -42,3 +32,23 @@ bookmark (str) - yes/no
 
 
 Rules (Complexity):
+
+Mentoring 1 (2023/05/26):
+1. Tampilkan Data
+a. Tambah sub menu sort a-z / z-a
+
+2. Add Data
+a. Konfirmasi data duplicate
+
+3. Delete Data
+a. Tambah pilihan hapus berdasarkan kolom (OK)
+b. Kalau berdasarkan index, bisa add lebih dari 1 index (OK)
+c. Kalau yang lain hapus berdasarkan group (OK)
+d. Buat Konfirmasi Apakah benar data ini yang akan dihapus (OK)
+
+4. Update Data
+a. Buat Konfirmasi Apakah benar data ini yang akan diedit
+b. Buat Konfirmasi Perubahan Data (Tampilkan Before After)
+Bug:
+a. Bug searching 'Bantul' error - (OK)
+a. Setelah di edit data bookmark tidak langsung ke atas

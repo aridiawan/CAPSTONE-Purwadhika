@@ -1,10 +1,5 @@
 id;nama;no_telepon;jenis;kabupaten_kota;bookmark
-6;BANTUL;367509;pemerintah daerah;Bantul;yes
 49;RSUD BANTUL;367381, 367386;rumah sakit;Bantul;yes
-2;GUNUNG KIDUL;391761;pemerintah daerah;Gunung kidul;no
-3;KULON PROGO;773238;pemerintah daerah;Kulon progo;no
-4;SLEMAN;868405;pemerintah daerah;Sleman;no
-5;KOTA JOGJA;515865;pemerintah daerah;Yogyakarta;no
 7;TUGU;589685;stasiun;Yogyakarta;no
 8;LEMPUYANGAN;512454;stasiun;Yogyakarta;no
 9;STASIUN WATES;773021;stasiun;Yogyakarta;no

@@ -39,6 +39,19 @@ def show(data):
     print(tabulate.tabulate([data[i].values() for i in range(len(data))], data[0].keys(), tablefmt='outline'))
     # Sub Menu:
     # a. Fitur Search
+def search():
+    print('Secara default fitur ini hanya mencari berdasar kolom nama dan no hp:')
+    value = input('input your value :')
+    scDataset = []
+    for i in range(len(dataset)):
+        if value.upper() in list(dataset[i].values())[1] or value in list(dataset[i].values())[2]:
+            scDataset.append(dataset[i])
+    
+    if len(scDataset) > 0:
+        show(scDataset)
+    else:
+        print('!!!Data not found!!!\n') 
+
     # b. Show by Filter
 def filter():
     key = pypi.inputMenu(prompt='Pilih kolom yang akan difilter:\n', choices=header[1:], numbered=True)
@@ -54,6 +67,8 @@ def filter():
     # c. Show Summary Kontak
 def summary():
     key = header[3:5]
+
+    print(f'\nTotal Kontak : {len(dataset)}')
 
     # JENIS
     listvalue1 = list(dataset[i][key[0]] for i in range(len(dataset)))
@@ -120,17 +135,84 @@ def add():
     show(dataset)
 
 # 3. Menghapus Data Kontak
-def delete():
-    # notif konfirmasi
+# a. Delete by ID
+def deleteID():
+    # Collect id to delete
+    listID  = []
+    while True:
+        id = input('Masukkan id yang ingin dihapus :')
+        if id == '':
+            break
+        else:
+            listID.append(int(id))
+    listID = list(set(listID))
 
-    id = int(input('Masukkan id yang ingin dihapus :'))
+    # Validate listID ada isinya gak
+    if len(listID) == 0:
+        print('!!! NO ID INPUTED !!!')
+    else:
+        # Confirmation (Show data that will be deleted)
+        print(listID)
+        conData = []
+        for i in listID:
+            for j in range(len(dataset)):
+                if i == list(dataset[j].values())[0]:
+                    conData.append(dataset[j])
+        
+        if len(conData) == 0:
+            print('\n??? ID tidak ditemukan ???\n')
+        else:
+            show(conData)
 
-    # delete process
+            prompt = '\nAre you sure to delete this data ?(Y/N) :'
+            con = pypi.inputYesNo(prompt=prompt)
+
+            if con == 'yes':
+                # Delete process
+                # for i in listID:
+                #     for j in range(len(dataset)-1):
+                #         if i == list(dataset[j].values())[0]:
+                #             del dataset[j]
+                for dat in dataset.copy():
+                    if dat in conData:
+                        dataset.remove(dat)
+
+                print(f'{len(conData)} data dihapus \n')
+                show(dataset)
+            else:
+                print('data tidak jadi dihapus !!!')
+
+# b. Delete by Jenis/Kabupaten Kota
+def deleteGroup():
+    group = header[3:5]
+    key1 = pypi.inputMenu(prompt='Pilih Group (1):\n', choices=group, numbered=True)
+    listvalue1 = list({dataset[i][key1] for i in range(len(dataset))})
+    value1 = pypi.inputMenu(prompt='Pilih value:\n', choices=listvalue1, numbered=True)
+    filterDataset1 = []
     for i in range(len(dataset)):
-        if id == list(dataset[i].values())[0]:
-            del dataset[i]
+        if value1 in dataset[i][key1]:
+            filterDataset1.append(dataset[i])  
+    show(filterDataset1)
 
-    show(dataset)
+    group.remove(key1)
+
+    conf = pypi.inputYesNo(prompt=f'Tambah pilih Group (2) by {group[0]} : ')
+    if conf == 'yes':
+        key2 = group[0]
+        listvalue2 = list({dataset[i][key2] for i in range(len(dataset))})
+        value2 = pypi.inputMenu(prompt='Pilih value:\n', choices=listvalue2, numbered=True)
+        filterDataset2 = []
+        for i in range(len(dataset)):
+            if value2 in dataset[i][key2] and value1 in dataset[i][key1]:
+                filterDataset2.append(dataset[i])  
+        show(filterDataset2)
+
+        conf = pypi.inputYesNo(prompt='\nAnda yakin mau hapus semua data diatas?\n')
+        if conf == 'yes':
+            for dat in dataset.copy():
+                if dat in filterDataset2:
+                    dataset.remove(dat)
+            show(dataset)
 
 # 4. Mengedit Data Kontak
 def edit():
@@ -163,20 +245,32 @@ def main():
         if response == choice[0]:
             show(dataset)
             while True:
-                choiceDisp = ['Search Nama','Filter','Summary Kontak-mu','Back to Main Menu']
+                choiceDisp = ['Tampilkan Semua','Search Nama','Filter','Summary Kontak-mu','Back to Main Menu']
                 respDisp = pypi.inputMenu(choices=choiceDisp, numbered=True)
                 if respDisp == choiceDisp[0]:
-                    print('fitur otw')
-                elif respDisp == choiceDisp[1]:
-                    filter()
+                    show(dataset)
+                if respDisp == choiceDisp[1]:
+                    search()
                 elif respDisp == choiceDisp[2]:
+                    filter()
+                elif respDisp == choiceDisp[3]:
                     summary()
                 else:
                     break
         elif response == choice[1]:
             add()
         elif response == choice[2]:
-            delete()
+            while True:
+                choiceDisp = ['Hapus Data Berdasar ID','Hapus Data Berdasar Jenis/Kabupaten Kota','Back to Main Menu']
+                respDisp = pypi.inputMenu(choices=choiceDisp, numbered=True)
+                if respDisp == choiceDisp[0]:
+                    deleteID()
+                elif respDisp == choiceDisp[1]:
+                    deleteGroup()
+                else:
+                    break
+                    
+                
         elif response == choice[3]:
             edit()
         else:
