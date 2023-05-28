@@ -1,7 +1,11 @@
 id;nama;no_telepon;jenis;kabupaten_kota;bookmark
+42;SLEMAN;868900;pmi;Sleman;yes
+43;RSUP DR. SARDJITO;587333;rumah sakit;Yogyakarta;yes
+44;RS PKU MUHAMMADIYAH;512653;rumah sakit;Sleman;yes
 49;RSUD BANTUL;367381, 367386;rumah sakit;Bantul;yes
-7;TUGU;589685;stasiun;Yogyakarta;no
-8;LEMPUYANGAN;512454;stasiun;Yogyakarta;no
+50;RS LUDIRA HUSADA;620333, 620373, 620091;rumah sakit;Yogyakarta;yes
+7;MITU;589685;pmi;Yogyakarta;no
+8;LEMPUYANGAN;12345;polisi;Yogyakarta;no
 9;STASIUN WATES;773021;stasiun;Yogyakarta;no
 10;BANDARA ADISUCIPTO;512143;penerbangan;Yogyakarta;no
 11;GARUDA;522148;penerbangan;Yogyakarta;no
@@ -35,11 +39,3 @@ id;nama;no_telepon;jenis;kabupaten_kota;bookmark
 39;URUSAN SIM;566887;polisi;Yogyakarta;no
 40;DIY;376812;pmi;Yogyakarta;no
 41;KOTA JOGJA;372176;pmi;Yogyakarta;no
-42;SLEMAN;868900;pmi;Sleman;no
-43;RSUP DR. SARDJITO;587333;rumah sakit;Yogyakarta;no
-44;RS PKU MUHAMMADIYAH;512653;rumah sakit;Sleman;no
-45;RS PANTI RAPIH;514845;rumah sakit;Sleman;no
-46;RS BETHESDA;586688;rumah sakit;Sleman;no
-47;RSKB PATMASURI;372022;rumah sakit;Sleman;no
-48;RSI HIDAYATULAH;389194;rumah sakit;Yogyakarta;no
-50;RS LUDIRA HUSADA;620333, 620373, 620091;rumah sakit;Yogyakarta;no

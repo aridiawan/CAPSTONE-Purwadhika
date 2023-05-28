@@ -3,36 +3,6 @@ import sys
 import tabulate
 import pyinputplus as pypi
 
-path = "D:\PURWADHIKA\PLAYGROUND\PYTHON\Modul 1\Capstone Project\CAPSTONE-Purwadhika\Modul 1\important_number_jogja.csv"
-
-file = open(path)
-reader = csv.reader(file, delimiter=';')
-
-header = next(reader)
-dataset = []
-
-for row in reader:
-    if 'yes' in row[5]:
-        dataset.insert(0,{
-            header[0] : int(row[0]),
-            header[1] : str(row[1]).upper(),
-            header[2] : str(row[2]),
-            header[3] : str(row[3]).lower(),
-            header[4] : str(row[4]).capitalize(),
-            header[5] : str(row[5])
-        })
-    else:
-        dataset.append({
-            header[0] : int(row[0]),
-            header[1] : str(row[1]).upper(),
-            header[2] : str(row[2]),
-            header[3] : str(row[3]).lower(),
-            header[4] : str(row[4]).capitalize(),
-            header[5] : str(row[5])
-        })
-
-file.close()
-
 # 1. Menampilkan Daftar Kontak
     # default display: All Data w/ Bookmark on top
 def show(data):
@@ -113,26 +83,39 @@ def summary():
     print('\n')
 
 # 2. Menambah Data Kontak
-def add():
-    listJenis = {list(dataset[i].values())[3] for i in range(len(dataset))}
+def addNormal():
+    listJenis = list(set(list(dataset[i].values())[3] for i in range(len(dataset))))
     listKabkot = list(set(list(dataset[i].values())[4] for i in range(len(dataset))))
     listId = [list(dataset[i].values())[0] for i in range(len(dataset))]
 
-    nama = input('input name :').upper()
-    no_telepon = input('input no telepon :')
-    jenis = input('input jenis :').lower()
-    kabKot = pypi.inputMenu(prompt='input kabupaten / kota :\n', choices=listKabkot, numbered=True)
+    no_telepon = pypi.inputStr(prompt='input no telepon :', blockRegexes=[r'[A-Za-z]'])
 
-    dataset.append({
-        header[0] : max(listId)+1,
-        header[1] : nama,
-        header[2] : no_telepon,
-        header[3] : jenis,
-        header[4] : kabKot,
-        header[5] : 'no'
-    })
+    datNo = []
+    # check no hp ada di database / tidak
+    for i in range(len(dataset)):
+        if no_telepon == list(dataset[i].values())[2]:
+            print('''Nomor sudah ada di dalam database :''')
+            datNo.append(dataset[i])
+            break
+    
+    if len(datNo) > 0:
+        show(datNo)
+    else:          
+        nama = input('input name :').upper()
+        jenis = pypi.inputMenu(prompt='input jenis :\n', choices=listJenis, numbered=True)
+        kabKot = pypi.inputMenu(prompt='input kabupaten / kota :\n', choices=listKabkot, numbered=True)
 
-    show(dataset)
+        dataset.append({
+            header[0] : max(listId)+1,
+            header[1] : nama,
+            header[2] : no_telepon,
+            header[3] : jenis,
+            header[4] : kabKot,
+            header[5] : 'no'
+        })
+
+        print('Data Sucessufully Added !\n')
+        show(dataset)
 
 # 3. Menghapus Data Kontak
 # a. Delete by ID
@@ -212,21 +195,52 @@ def deleteGroup():
 
 # 4. Mengedit Data Kontak
 def edit():
-    
+    listId = [list(dataset[i].values())[0] for i in range(len(dataset))]
+
     id = int(input('Masukkan id yang ingin diedit :'))
 
-    for i in range(len(dataset)):
-        if id == list(dataset[i].values())[0]:
-            while True:
-                key = pypi.inputMenu(prompt='Pilih info yang mau diupdate :\n', choices=header[1:], numbered=True)
-                value = input('Input value :')
-                dataset[i][key] = value
-                
-                contEdit = pypi.inputYesNo(prompt='Ingin mengedit lagi?(Y/N) :')
-                if contEdit == 'no':
-                    break
+    if id not in listId:
+        print('ID NOT FOUND !')
+    else:
+        for i in range(len(dataset)):
+            if id == list(dataset[i].values())[0]:
 
-    show(dataset)
+                print('This data will be edited :')
+                show([dataset[i]])
+
+                while True:
+                    listJenis = list(set(list(dataset[i].values())[3] for i in range(len(dataset))))
+                    listKabkot = list(set(list(dataset[i].values())[4] for i in range(len(dataset))))
+
+                    key = pypi.inputMenu(prompt='Pilih info yang mau diupdate :\n', choices=header[1:], numbered=True)
+                    
+                    if key == header[1]:
+                        val = input('input name :').upper()
+                    elif key == header[2]:
+                        val = pypi.inputStr(prompt='input no telepon :', blockRegexes=[r'[A-Za-z]'])
+                    elif key == header[3]:
+                        val = pypi.inputMenu(prompt='input jenis :\n', choices=listJenis, numbered=True)
+                    elif key == header[4]:
+                        val = pypi.inputMenu(prompt='input kabupaten / kota :\n', choices=listKabkot, numbered=True)
+                    else:
+                        val = pypi.inputYesNo(prompt='bookmark kontak ini?(Y/N) :')
+
+                    print('Before :')
+                    show([dataset[i]])
+
+                    dataset[i][key] = val
+
+                    print('\nAfter')
+                    show([dataset[i]])
+
+                    if key == header[5] and val == 'yes':
+                        dataset.insert(0,dataset.pop(i))
+                    
+                    contEdit = pypi.inputYesNo(prompt='Ingin mengedit lagi?(Y/N) :')
+                    if contEdit == 'no':
+                        break
+        
+        show(dataset)
 
 def main():
     global dataset
@@ -254,7 +268,13 @@ def main():
                 else:
                     break
         elif response == choice[1]:
-            add()
+            while True:
+                choiceDisp = ['Tambah Data','Back to Main Menu']
+                respDisp = pypi.inputMenu(choices=choiceDisp, numbered=True)
+                if respDisp == choiceDisp[0]:
+                    addNormal()
+                else:
+                    break
         elif response == choice[2]:
             while True:
                 choiceDisp = ['Hapus Data Berdasar ID','Hapus Data Berdasar Jenis/Kabupaten Kota','Back to Main Menu']
@@ -282,5 +302,36 @@ def main():
 
     file.close()
 
-main()
-sys.exit()
+if __name__ == "__main__":
+    path = "D:\PURWADHIKA\PLAYGROUND\PYTHON\Modul 1\Capstone Project\CAPSTONE-Purwadhika\Modul 1\important_number_jogja.csv"
+
+    file = open(path)
+    reader = csv.reader(file, delimiter=';')
+
+    header = next(reader)
+    dataset = []
+
+    for row in reader:
+        if 'yes' in row[5]:
+            dataset.insert(0,{
+                header[0] : int(row[0]),
+                header[1] : str(row[1]).upper(),
+                header[2] : str(row[2]),
+                header[3] : str(row[3]).lower(),
+                header[4] : str(row[4]).capitalize(),
+                header[5] : str(row[5])
+            })
+        else:
+            dataset.append({
+                header[0] : int(row[0]),
+                header[1] : str(row[1]).upper(),
+                header[2] : str(row[2]),
+                header[3] : str(row[3]).lower(),
+                header[4] : str(row[4]).capitalize(),
+                header[5] : str(row[5])
+            })
+
+    file.close()
+
+    main()
+    sys.exit()
