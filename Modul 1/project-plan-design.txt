@@ -35,11 +35,11 @@ Rules (Complexity):
 
 Mentoring 1 (2023/05/26):
 1. Tampilkan Data
-a. Tambah sub menu sort a-z / z-a
+a. Tambah sub menu sort a-z / z-a (CANCELED)
 
 2. Add Data
 a. Konfirmasi data duplicate | masukkan no hp dulu (OK)
-b. Add fitur add bulk data | jika ada data dengan nomor telfon yang match maka konfirmasi apakah akan menimpa data tsb atau tidak
+b. Add fitur add bulk data | jika ada data dengan nomor telfon yang match maka konfirmasi apakah akan menimpa data tsb atau tidak (CANCELED)
 
 3. Delete Data
 a. Tambah pilihan hapus berdasarkan kolom (OK)
@@ -49,7 +49,7 @@ d. Buat Konfirmasi Apakah benar data ini yang akan dihapus (OK)
 
 4. Update Data
 a. Buat Konfirmasi Apakah benar data ini yang akan diedit (OK) 
-b. Buat Konfirmasi Perubahan Data (Tampilkan Before After)
+b. Buat Konfirmasi Perubahan Data (Tampilkan Before After) (OK)
 Bug:
 a. Bug searching 'Bantul' error - (OK)
-a. Setelah di edit data bookmark tidak langsung ke atas
+a. Setelah di edit data bookmark tidak langsung ke atas (OK)

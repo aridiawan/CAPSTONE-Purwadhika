@@ -3,27 +3,41 @@ import sys
 import tabulate
 import pyinputplus as pypi
 
-# 1. Menampilkan Daftar Kontak
-    # default display: All Data w/ Bookmark on top
 def show(data):
+    '''Fungsi untuk menampilkan dataset ke prompt
+    
+    Args:
+        data (list of dictionary): dataset yang akan ditampilkan
+    '''
+
+    # Print to prompt in table format
     print(tabulate.tabulate([data[i].values() for i in range(len(data))], data[0].keys(), tablefmt='outline'))
-    # Sub Menu:
-    # a. Fitur Search
+
 def search():
-    print('Secara default fitur ini hanya mencari berdasar kolom nama dan no hp:')
+    '''Fungsi untuk mencari data kontak
+    '''
+    # Print notes about default condition of this feature
+    print("Notes: In default this feature only search based on 'nama' and 'no_telepon' column")
+
+    # Input value to search
     value = input('input your value :')
+
+    # Create list of data that contain the value
     scDataset = []
     for i in range(len(dataset)):
         if value.upper() in list(dataset[i].values())[1] or value in list(dataset[i].values())[2]:
             scDataset.append(dataset[i])
     
+    # Validate the result (if value is founded then show the data, if not then print notification)
     if len(scDataset) > 0:
         show(scDataset)
     else:
-        print('!!!Data not found!!!\n') 
+        print("Data does not exist!\n") 
 
-    # b. Show by Filter
 def filter():
+    '''Fungsi untuk memfilter dataset
+    '''
+    # input the key (column) that used to filter
     key = pypi.inputMenu(prompt='Pilih kolom yang akan difilter:\n', choices=header[1:], numbered=True)
     listvalue = list({dataset[i][key] for i in range(len(dataset))})
     value = pypi.inputMenu(prompt='Pilih value:\n', choices=listvalue, numbered=True)
@@ -36,6 +50,8 @@ def filter():
 
     # c. Show Summary Kontak
 def summary():
+    '''fungsi untuk menampilkan descriptive summary dari dataset kontak 
+    '''
     key = header[3:5]
 
     print(f'\nTotal Kontak : {len(dataset)}')
@@ -84,6 +100,8 @@ def summary():
 
 # 2. Menambah Data Kontak
 def addNormal():
+    '''Fungsi untuk menambah data kontak
+    '''
     listJenis = list(set(list(dataset[i].values())[3] for i in range(len(dataset))))
     listKabkot = list(set(list(dataset[i].values())[4] for i in range(len(dataset))))
     listId = [list(dataset[i].values())[0] for i in range(len(dataset))]
@@ -114,11 +132,14 @@ def addNormal():
             header[5] : 'no'
         })
 
+        print('Data Sucessufully Added !\n')
         show(dataset)
 
 # 3. Menghapus Data Kontak
 # a. Delete by ID
 def deleteID():
+    '''Fungsi untuk menghapus data kontak berdasarkan id
+    '''
     # Collect id to delete
     listID  = []
     while True:
@@ -162,6 +183,8 @@ def deleteID():
 
 # b. Delete by Jenis/Kabupaten Kota
 def deleteGroup():
+    '''Fungsi untuk menghapus data kontak berdasarkan group dari kolom tertentu
+    '''
     group = header[3:5]
     key1 = pypi.inputMenu(prompt='Pilih Group (1):\n', choices=group, numbered=True)
     listvalue1 = list({dataset[i][key1] for i in range(len(dataset))})
@@ -194,6 +217,8 @@ def deleteGroup():
 
 # 4. Mengedit Data Kontak
 def edit():
+    '''Fungsi untuk mengupdate data kontak
+    '''
     listId = [list(dataset[i].values())[0] for i in range(len(dataset))]
 
     id = int(input('Masukkan id yang ingin diedit :'))
@@ -242,6 +267,8 @@ def edit():
         show(dataset)
 
 def main():
+    '''Program utama untuk menjalankan semua proses
+    '''
     global dataset
 
     while True:
@@ -268,12 +295,10 @@ def main():
                     break
         elif response == choice[1]:
             while True:
-                choiceDisp = ['Tambah Data (Normal)','Tambah Data (Bulk)','Back to Main Menu']
+                choiceDisp = ['Tambah Data','Back to Main Menu']
                 respDisp = pypi.inputMenu(choices=choiceDisp, numbered=True)
                 if respDisp == choiceDisp[0]:
                     addNormal()
-                elif respDisp == choiceDisp[1]:
-                    print('otw')
                 else:
                     break
         elif response == choice[2]:
@@ -304,11 +329,15 @@ def main():
     file.close()
 
 if __name__ == "__main__":
+    # define path (file stored location)
     path = "D:\PURWADHIKA\PLAYGROUND\PYTHON\Modul 1\Capstone Project\CAPSTONE-Purwadhika\Modul 1\important_number_jogja.csv"
 
+    # import databse file
     file = open(path)
+    # read data from database file
     reader = csv.reader(file, delimiter=';')
 
+    # create list of dictionary from database
     header = next(reader)
     dataset = []
 
@@ -332,7 +361,11 @@ if __name__ == "__main__":
                 header[5] : str(row[5])
             })
 
+    # close the database file
     file.close()
 
+    # Run main program
     main()
+
+    # Close the program
     sys.exit()
