@@ -4,12 +4,30 @@ A simple application to record important contact
 
 ## Installation
 
-TODO - fill this in later
+To clone from github, run:
+
+'''
+mkdir folder
+cd folder
+git clone git@github.com:aridiawan/CAPSTONE-Purwadhika.git
+'''
+
+To install requirement with pip, run:
+
+'''
+pip install -r requirements.txt
+'''
 
 ## Quickstart Guide
 
-TODO - fill this in later
+1. Read Option
+
+2. Create Option
+
+3. Update Option
+
+4. Delete Option
 
 ## Contribute
 
-TODO - fill this in later
+If you'd like to contribute to Yogyakarta Important Contact, check out https://github.com/aridiawan/CAPSTONE-Purwadhika.git
