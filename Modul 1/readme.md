@@ -21,21 +21,21 @@ pip install -r requirements.txt
 ## Quickstart Guide
 
 1. Show Contact
-    Menu to show the contact
-    * Show All
-        Show all the contact database
-        Select this submenu to show all the contact that contain in database
-    * Search
-        Search the contact database
-        Input the value to search the contact based on name or phone number
-    * Filter
-        Filter the contact database
-        Select the column and the value to show only selected contact with desired conditions
-    * Summary
-        Summary the contact database
-        Select this submenu to show the summary number of contact in database
-    * Back to Main Menu
-        Select this submenu for back to main menu
+> Menu to show the contact
+>> a. Show All
+>>> <b>Show all the contact database</b>
+>>> Select this submenu to show all the contact that contain in database
+>> b. Search
+>>> <b>Search the contact database</b>
+>>> Input the value to search the contact based on name or phone number
+>> c. Filter
+>>> <b>Filter the contact database</b>
+>>> Select the column and the value to show only selected contact with desired conditions
+>> d. Summary
+>>> <b>Summary the contact database</b>
+>>> Select this submenu to show the summary number of contact in database
+>> e. Back to Main Menu
+>>> Select this submenu for back to main menu
 
 2. Add Contact
 * Add New Contact
