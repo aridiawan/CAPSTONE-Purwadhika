@@ -346,7 +346,7 @@ def main():
                     break
         elif response == choice[1]:
             while True:
-                choiceDisp = ['Add Data','Back to Main Menu']
+                choiceDisp = ['Add New Contact','Back to Main Menu']
                 respDisp = pypi.inputMenu(choices=choiceDisp, numbered=True)
                 if respDisp == choiceDisp[0]:
                     addNormal()
