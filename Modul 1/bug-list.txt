@@ -1,0 +1,8 @@
+BUG REVIEW (2023-05-29)
+1. DATABASE : Error when:
+- semua data kosong
+- header kosong
+- row ke skip
+
+2. DELETE : Error when:
+- memilih pilihan yang tidak ada

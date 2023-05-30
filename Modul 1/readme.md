@@ -1,4 +1,4 @@
-# Yogyakarta Importanct Contact Project (Yellow Pages)
+# Yogyakarta Important Contact System Project (Yellow Pages)
 
 A simple application to record important contact
 
