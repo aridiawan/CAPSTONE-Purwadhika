@@ -386,8 +386,8 @@ def main():
     file.close()
 
 if __name__ == "__main__":
-    # define path (file stored location)
-    path = "D:\PURWADHIKA\PLAYGROUND\PYTHON\Modul 1\Capstone Project\CAPSTONE-Purwadhika\Modul 1\important_number_jogja.csv"
+    # Input File Path
+    path = pypi.inputFilepath(prompt='Input your File (important_number_jogja.csv) path : ')
 
     # Check empty files
     if os.path.getsize(path) == 0:
