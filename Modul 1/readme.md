@@ -6,17 +6,17 @@ A simple application to record important contact
 
 To clone from github, run:
 
-'''
+```
 mkdir folder
 cd folder
 git clone git@github.com:aridiawan/CAPSTONE-Purwadhika.git
-'''
+```
 
 To install requirement with pip, run:
 
-'''
+```
 pip install -r requirements.txt
-'''
+```
 
 ## Quickstart Guide
 
