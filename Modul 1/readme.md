@@ -22,26 +22,26 @@ pip install -r requirements.txt
 
 1. Show Contact
     Menu to show the contact
-    ** Show All
+    * Show All
         Show all the contact database
         Select this submenu to show all the contact that contain in database
-    ** Search
+    * Search
         Search the contact database
         Input the value to search the contact based on name or phone number
-    ** Filter
+    * Filter
         Filter the contact database
         Select the column and the value to show only selected contact with desired conditions
-    ** Summary
+    * Summary
         Summary the contact database
         Select this submenu to show the summary number of contact in database
-    ** Back to Main Menu
+    * Back to Main Menu
         Select this submenu for back to main menu
 
 2. Add Contact
-** Add New Contact
+* Add New Contact
 Add new contact
 Input new contact to database by fill all the information needed
-** Back to Main Menu
+* Back to Main Menu
 Select this submenu for back to main menu
 
 3. Delete Contact
